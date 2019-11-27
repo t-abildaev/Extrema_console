@@ -9,14 +9,14 @@
 
 class Method
 {
-public:
+protected:
 	int dimension;
-	Function* function;
-	Rectangle* rectangle;
-	StopCriterion* stopCriterion;
+	Function& function;
+	Rectangle& rectangle;
+	StopCriterion& stopCriterion;
 	Vector initial = Vector(dimension);
-	Method(int _dimension, Function* _function, Rectangle* _rectangle, StopCriterion* _stopCriterion);
-	Method(int _dimension, Function* _function, Rectangle* _rectangle, StopCriterion* _stopCriterion, Vector _initial);
+public:
+	Method(int _dimension, Function& _function, Rectangle& _rectangle, StopCriterion& _stopCriterion, Vector _initial);
 	virtual ~Method() {};
 	virtual void optimize() = 0;
 	void setInitial(const Vector& vector);
@@ -25,9 +25,10 @@ public:
 class RSS :
 	public Method
 {
+protected:
+	double p = 0.5;
 public:
-	RSS(int _dimension, Function* _function, Rectangle* _rectangle, StopCriterion* _stopCriterion);
-	RSS(int _dimension, Function* _function, Rectangle* _rectangle, StopCriterion* _stopCriterion, Vector initial);
+	RSS(int _dimension, Function& _function, Rectangle& _rectangle, StopCriterion& _stopCriterion, Vector initial, double _p);
 	void optimize();
 };
 
@@ -35,7 +36,6 @@ class PRCG :
 	public Method
 {
 public:
-	PRCG(int _dimension, Function* _function, Rectangle* _rectangle, StopCriterion* _stopCriterion);
-	PRCG(int _dimension, Function* _function, Rectangle* _rectangle, StopCriterion* _stopCriterion, Vector initial);
+	PRCG(int _dimension, Function& _function, Rectangle& _rectangle, StopCriterion& _stopCriterion, Vector initial);
 	void optimize();
 };

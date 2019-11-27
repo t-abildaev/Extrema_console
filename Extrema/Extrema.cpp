@@ -75,10 +75,10 @@ void begin()
 	switch (k)
 	{
 	case 1:
-		sc = new byDifference(f, r, l, eps);
+		sc = new byDifference(*f, *r, l, eps);
 		break;
 	case 2:
-		sc = new byGradient(f, r, l, eps);
+		sc = new byGradient(*f, *r, l, eps);
 		break;
 	}
 	std::cout << std::endl;
@@ -90,10 +90,10 @@ void begin()
 	switch (k)
 	{
 	case 1:
-		m = new RSS(dimension, f, r, sc, init);
+		m = new RSS(dimension, *f, *r, *sc, init);
 		break;
 	case 2:
-		m = new PRCG(dimension, f, r, sc, init);
+		m = new PRCG(dimension, *f, *r, *sc, init);
 		break;
 	}
 	std::cout << std::endl;

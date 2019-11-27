@@ -12,6 +12,16 @@ bool Rectangle::isInRectangle(const Vector& vector)
 	return(a <= vector && (Vector) vector <= b);
 }
 
+Vector& Rectangle::getLeft()
+{
+	return(a);
+}
+
+Vector& Rectangle::getRight()
+{
+	return(b);
+}
+
 double Rectangle::howFar(const Vector& vector, const Vector& direction)
 {
 	double alpha = b[0] - a[0];
