@@ -8,37 +8,37 @@
 class StopCriterion
 {
 protected:
-	int numberOfIterations = 1000;
-	Function& function;
-	Rectangle& rectangle;
+	int num_of_iter = 1000;
+	double eps = 0.05;
+	Function & function;
+	Rectangle & rectangle;
 public:
-	double eps = 0.1;
-	StopCriterion(Function& _function, Rectangle& _rectangle);
-	StopCriterion(Function& _function, Rectangle& _rectangle, int _numberOfIterations);
-	StopCriterion(Function& _function, Rectangle& _rectangle, double _eps);
-	StopCriterion(Function& _function, Rectangle& _rectangle, int _numberOfIterations, double _eps);
+	StopCriterion(Function & _function, Rectangle & _rectangle);
+	StopCriterion(Function & _function, Rectangle & _rectangle, int _num_of_iter);
+	StopCriterion(Function & _function, Rectangle & _rectangle, double _eps);
+	StopCriterion(Function & _function, Rectangle & _rectangle, int _num_of_iter, double _eps);
 	virtual ~StopCriterion() {};
-	virtual bool ifStop(const Vector& x_current, const Vector& x_previous) = 0;
+	virtual bool if_stop(const Vector & x_current, const Vector & x_previous) = 0;
 };
 
-class byGradient : public StopCriterion
+class by_gradient : public StopCriterion
 {
 public:
-	byGradient(Function& _function, Rectangle& _rectangle);
-	byGradient(Function& _function, Rectangle& _rectangle, int _numberOfIterations);
-	byGradient(Function& _function, Rectangle& _rectangle, double _eps);
-	byGradient(Function& _function, Rectangle& _rectangle, int _numberOfIterations, double _eps);
-	~byGradient() {};
-	bool ifStop(const Vector& x_current, const Vector& x_previous) override;
+	by_gradient(Function & _function, Rectangle & _rectangle);
+	by_gradient(Function & _function, Rectangle & _rectangle, int _num_of_iter);
+	by_gradient(Function & _function, Rectangle & _rectangle, double _eps);
+	by_gradient(Function & _function, Rectangle & _rectangle, int _num_of_iter, double _eps);
+	~by_gradient() {};
+	bool if_stop(const Vector & x_current, const Vector & x_previous) override;
 };
 
-class byDifference : public StopCriterion
+class by_difference : public StopCriterion
 {
 public:
-	byDifference(Function& _function, Rectangle& _rectangle);
-	byDifference(Function& _function, Rectangle& _rectangle, int _numberOfIterations);
-	byDifference(Function& _function, Rectangle& _rectangle, double _eps);
-	byDifference(Function& _function, Rectangle& _rectangle, int _numberOfIterations, double _eps);
-	~byDifference() {};
-	bool ifStop(const Vector& x_current, const Vector& x_previous) override;
+	by_difference(Function & _function, Rectangle & _rectangle);
+	by_difference(Function & _function, Rectangle & _rectangle, int _num_of_iter);
+	by_difference(Function & _function, Rectangle & _rectangle, double _eps);
+	by_difference(Function & _function, Rectangle & _rectangle, int _num_of_iter, double _eps);
+	~by_difference() {};
+	bool if_stop(const Vector & x_current, const Vector & x_previous) override;
 };

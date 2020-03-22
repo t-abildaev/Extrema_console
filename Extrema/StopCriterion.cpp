@@ -1,66 +1,53 @@
 #include "StopCriterion.h"
 
-StopCriterion::StopCriterion(Function& _function, Rectangle& _rectangle) :
+StopCriterion::StopCriterion(Function & _function, Rectangle & _rectangle) :
 	function(_function), rectangle(_rectangle) {}
 
-StopCriterion::StopCriterion(Function& _function, Rectangle& _rectangle, int _numberOfIterations) :
-	StopCriterion(_function, _rectangle)
-{
-	numberOfIterations = _numberOfIterations;
-}
+StopCriterion::StopCriterion(Function & _function, Rectangle & _rectangle, int _num_of_iter) :
+	function(_function), rectangle(_rectangle), num_of_iter(_num_of_iter) {}
 
-StopCriterion::StopCriterion(Function& _function, Rectangle& _rectangle, double _eps) :
-	StopCriterion(_function, _rectangle)
-{
-	eps = _eps;
-}
+StopCriterion::StopCriterion(Function & _function, Rectangle & _rectangle, double _eps) :
+	function(_function), rectangle(_rectangle), eps(_eps) {}
 
-StopCriterion::StopCriterion(Function& _function, Rectangle& _rectangle, int _numberOfIterations, double _eps) :
-	StopCriterion(_function, _rectangle)
-{
-	numberOfIterations = _numberOfIterations;
-	eps = _eps;
-}
+StopCriterion::StopCriterion(Function & _function, Rectangle & _rectangle, int _num_of_iter, double _eps) :
+	function(_function), rectangle(_rectangle), num_of_iter(_num_of_iter), eps(_eps) {}
 
-byGradient::byGradient(Function& _function, Rectangle& _rectangle) :
+by_gradient::by_gradient(Function & _function, Rectangle & _rectangle) :
 	StopCriterion(_function, _rectangle) {}
 
-byGradient::byGradient(Function& _function, Rectangle& _rectangle, int _numberOfIterations) :
-	StopCriterion(_function, _rectangle, _numberOfIterations) {}
+by_gradient::by_gradient(Function & _function, Rectangle & _rectangle, int _num_of_iter) :
+	StopCriterion(_function, _rectangle, _num_of_iter) {}
 
-byGradient::byGradient(Function& _function, Rectangle& _rectangle, double _eps) :
+by_gradient::by_gradient(Function & _function, Rectangle & _rectangle, double _eps) :
 	StopCriterion(_function, _rectangle, _eps) {}
 
-byGradient::byGradient(Function& _function, Rectangle& _rectangle, int _numberOfIterations, double _eps) :
-	StopCriterion(_function, _rectangle, _numberOfIterations, _eps) {}
+by_gradient::by_gradient(Function & _function, Rectangle & _rectangle, int _num_of_iter, double _eps) :
+	StopCriterion(_function, _rectangle, _num_of_iter, _eps) {}
 
-bool byGradient::ifStop(const Vector& x_current, const Vector& x_previous)
+bool by_gradient::if_stop(const Vector & x_current, const Vector & x_previous)
 {
-	Vector h(x_current.dimension, false);
-	double alpha = rectangle.howFar(x_current, h);
-	alpha = alpha < eps ? alpha : eps;
-	if (numberOfIterations == 0 || abs(norm(function.gradientII(x_current, alpha))) < eps)
+	if (num_of_iter == 0 || abs(norm(function.gradient(x_current, 1e-3))) < eps)
 		return(true);
-	--numberOfIterations;
+	--num_of_iter;
 	return(false);
 }
 
-byDifference::byDifference(Function& _function, Rectangle& _rectangle) :
+by_difference::by_difference(Function & _function, Rectangle & _rectangle) :
 	StopCriterion(_function, _rectangle) {}
 
-byDifference::byDifference(Function& _function, Rectangle& _rectangle, int _numberOfIterations) :
-	StopCriterion(_function, _rectangle, _numberOfIterations) {}
+by_difference::by_difference(Function & _function, Rectangle & _rectangle, int _num_of_iter) :
+	StopCriterion(_function, _rectangle, _num_of_iter) {}
 
-byDifference::byDifference(Function& _function, Rectangle& _rectangle, double _eps) :
+by_difference::by_difference(Function & _function, Rectangle & _rectangle, double _eps) :
 	StopCriterion(_function, _rectangle, _eps) {}
 
-byDifference::byDifference(Function& _function, Rectangle& _rectangle, int _numberOfIterations, double _eps) :
-	StopCriterion(_function, _rectangle, _numberOfIterations, _eps) {}
+by_difference::by_difference(Function & _function, Rectangle & _rectangle, int _num_of_iter, double _eps) :
+	StopCriterion(_function, _rectangle, _num_of_iter, _eps) {}
 
-bool byDifference::ifStop(const Vector& x_current, const Vector& x_previous)
+bool by_difference::if_stop(const Vector & x_current, const Vector & x_previous)
 {
-	if (numberOfIterations == 0 || abs(function(x_current) - function(x_previous)) < eps)
+	if (num_of_iter == 0 || abs(function(x_current) - function(x_previous)) < eps)
 		return(true);
-	--numberOfIterations;
+	--num_of_iter;
 	return(false);
 }

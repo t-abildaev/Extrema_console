@@ -7,17 +7,24 @@ class Function
 public:
 	Function() {};
 	virtual ~Function() {};
-	virtual double operator () (const Vector& x) = 0;
-	Vector gradientII(const Vector& x, double h);
-	Vector gradientIII(const Vector& x, double h);
+	virtual double operator () (const Vector & x) = 0;
+	Vector gradient(const Vector & x, double h);
 };
 
-class Hyperbolic : public Function
+class Exponential : public Function
 {
 public:
-	Hyperbolic() {};
-	~Hyperbolic() {};
-	double operator ()(const Vector& x) override;
+	Exponential() {};
+	~Exponential() {};
+	double operator ()(const Vector & x) override;
+};
+
+class Trigonometric : public Function
+{
+public:
+	Trigonometric() {};
+	~Trigonometric() {};
+	double operator ()(const Vector & x) override;
 };
 
 class Rosenbrock : public Function
@@ -25,7 +32,7 @@ class Rosenbrock : public Function
 public:
 	Rosenbrock() {};
 	~Rosenbrock() {};
-	double operator ()(const Vector& x) override;
+	double operator ()(const Vector & x) override;
 };
 
 class Quadratic : public Function
@@ -33,5 +40,5 @@ class Quadratic : public Function
 public:
 	Quadratic() {};
 	~Quadratic() {};
-	double operator ()(const Vector& x) override;
+	double operator ()(const Vector & x) override;
 };

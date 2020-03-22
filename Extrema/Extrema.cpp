@@ -15,27 +15,33 @@ void begin()
 	int l = 0;
 	int dimension = 0;
 	double p = 0;
+	double delta = 0;
 	double eps = 0;
 
-	Function* f{};
-	StopCriterion* sc{};
-	Method* m{};
+	Function * function{};
+	StopCriterion * sc{};
+	Method * method{};
 
 	std::cout << "Please, choose the function:" << std::endl;
-	std::cout << "1. 'Hyperbolic': f(x, y) = ch^2(x) - sh^2(y)" << std::endl;
-	std::cout << "2. 'Rosenbrock': f(x, y, z) = (1 - x)^2 + 100(y - x)^2 + (1 - y)^2 + 100(z - y)^2" << std::endl;
-	std::cout << "3. 'Quadratic': f(x, y, z, t) = ((x - 1)^2 + 1)((y - 2)^2 + 1)((z - 3)^2 + 1)((t - 4)^2 + 1)" << std::endl;
+	std::cout << "1. 'Exponential': f(x, y) = exp(x) + exp(y)" << std::endl;
+	std::cout << "2. 'Trigonometric': f(x, y) = sin(x) + cos(y)" << std::endl;
+	std::cout << "3. 'Rosenbrock': f(x, y, z) = (1 - x)^2 + 100(y - x)^2 + (1 - y)^2 + 100(z - y)^2" << std::endl;
+	std::cout << "4. 'Quadratic': f(x, y, z, t) = (x - 1)^2 + (y - 2)^2 + (z - 3)^2 + (t - 4)^2" << std::endl;
 	std::cin >> k;
+
 	switch (k)
 	{
 	case 1:
-		f = new Hyperbolic;
+		function = new Exponential;
 		dimension = 2; break;
 	case 2:
-		f = new Rosenbrock;
-		dimension = 3; break;
+		function = new Trigonometric;
+		dimension = 2; break;
 	case 3:
-		f = new Quadratic;
+		function = new Rosenbrock;
+		dimension = 3; break;
+	case 4:
+		function = new Quadratic;
 		dimension = 4; break;
 	}
 	std::cout << std::endl;
@@ -50,7 +56,7 @@ void begin()
 		std::cin >> p;
 		b[i] = p;
 	}
-	Rectangle* r = new Rectangle(a, b);
+	Rectangle* rectangle = new Rectangle(a, b);
 	Vector init(dimension);
 	std::cout << std::endl;
 
@@ -75,10 +81,10 @@ void begin()
 	switch (k)
 	{
 	case 1:
-		sc = new byDifference(*f, *r, l, eps);
+		sc = new by_difference(*function, *rectangle, l, eps);
 		break;
 	case 2:
-		sc = new byGradient(*f, *r, l, eps);
+		sc = new by_gradient(*function, *rectangle, l, eps);
 		break;
 	}
 	std::cout << std::endl;
@@ -87,23 +93,29 @@ void begin()
 	std::cout << "1. 'RSS': Random Search Simple method" << std::endl;
 	std::cout << "2. 'PRCG': Polak-Ribiere Conjugate Gradient method" << std::endl;
 	std::cin >> k;
+	std::cout << std::endl;
 	switch (k)
 	{
 	case 1:
-		m = new RSS(dimension, *f, *r, *sc, init);
+		std::cout << "Please, enter p" << std::endl;
+		std::cin >> p;
+		std::cout << std::endl;
+		std::cout << "Please, enter delta for neighbourhood (0 < delta < 1)" << std::endl;
+		std::cin >> delta;
+		method = new RSS(dimension, *function, *rectangle, init, *sc, p, delta);
 		break;
 	case 2:
-		m = new PRCG(dimension, *f, *r, *sc, init);
+		method = new PRCG(dimension, *function, *rectangle, init, *sc);
 		break;
 	}
 	std::cout << std::endl;
 
-	m->optimize();
+	method->optimize();
 	std::cout << std::endl;
 
-	delete m;
-	delete f;
-	delete r;
+	delete method;
+	delete function;
+	delete rectangle;
 	delete sc;
 }
 
@@ -122,6 +134,51 @@ int main()
 		std::cout << std::endl;
 	}
 }
+
+//int main()
+//{
+//	Function * function{};
+//	StopCriterion*  sc{};
+//	Method * method{};
+//	Rectangle * rectangle{};
+//
+//	int n = 100;
+//	double p = 0.5;
+//	double delta = 0.25;
+//	double eps = 0.00001;
+//
+//	int dimension = 2;
+//	Vector a(dimension, -1);
+//	Vector b(dimension, 1);
+//	Vector initial(dimension, 0.5);
+//	function = new Trigonometric;
+//	//function = new Exponential;
+//
+//	int dimension = 3;
+//	Vector a(dimension, 0);
+//	Vector b(dimension, 10);
+//	Vector initial(dimension, 5);
+//	function = new Rosenbrock;
+//
+//	int dimension = 4;
+//	Vector a(dimension, 0);
+//	Vector b(dimension, 5);
+//	Vector initial(dimension, 1);
+//	function = new Quadratic;
+//
+//	rectangle = new Rectangle(a, b);
+//
+//	sc = new by_gradient(*function, *rectangle, n, eps);
+//	sc = new by_difference(*function, *rectangle, n, eps);
+//	
+//	method = new PRCG(dimension, *function, *rectangle, initial , *sc);
+//	method->optimize();
+//
+//	delete method;
+//	delete function;
+//	delete rectangle;
+//	delete sc;
+//}
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
