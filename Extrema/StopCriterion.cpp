@@ -1,4 +1,5 @@
 #include "StopCriterion.h"
+#include <iostream>
 
 StopCriterion::StopCriterion(Function & _function, Rectangle & _rectangle) :
 	function(_function), rectangle(_rectangle) {}
@@ -46,6 +47,7 @@ by_difference::by_difference(Function & _function, Rectangle & _rectangle, int _
 
 bool by_difference::if_stop(const Vector & x_current, const Vector & x_previous)
 {
+	//std::cout << abs(function(x_current) - function(x_previous)) << std::endl;
 	if (num_of_iter == 0 || abs(function(x_current) - function(x_previous)) < eps)
 		return(true);
 	--num_of_iter;

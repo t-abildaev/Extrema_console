@@ -102,7 +102,7 @@ void PRCG::optimize()
 	Vector b = rectangle.get_b();
 	Vector x_current(initial);
 	Vector x_previous = x_current + 1;
-	Vector grad_current(function.gradient(x_current, 1e-3));
+	Vector grad_current(function.gradient(x_current, 1e-6));
 	Vector direction = -grad_current;
 	Vector grad_next(dimension);
 
@@ -118,7 +118,9 @@ void PRCG::optimize()
 		f_right = function(x_current + _right * direction);
 	
 		while (right - left > 1e-6)
+		//while ((right - left) * norm(direction) > 1e-6)
 		{
+			//std::cout << function(x_current + left * direction) << "    " << function(x_current + _left * direction) << "    " << function(x_current + _right * direction) << "    " << function(x_current + right * direction) << std::endl;
 			if (f_left < f_right)
 			{
 				right = _right;
@@ -136,12 +138,15 @@ void PRCG::optimize()
 				f_right = function(x_current + _right * direction);
 			}
 		}
-
+		//std::cout << std::endl;
+		
+		//std::cout << i << " " << x_current[0] << " " << x_current[1] << " " << x_current[2] << "    " << alpha << "    " << norm(direction) << std::endl;
+		//std::cout << (x_current + alpha * direction)[0] << " " << (x_current + alpha * direction)[1] << " " << (x_current + alpha * direction)[2] << std::endl << std::endl;
 		x_previous = x_current;
 		x_current = x_previous + 0.5 * (left + right) * direction;
-		grad_next = function.gradient(x_current, 1e-3);
+		grad_next = function.gradient(x_current, 1e-6);
 		alpha = (grad_next * (grad_next - grad_current)) / (grad_current * grad_current);
-		direction = alpha * direction - grad_current;
+		direction = -grad_current + alpha * direction;
 		grad_current = grad_next;
 		++i;
 	}

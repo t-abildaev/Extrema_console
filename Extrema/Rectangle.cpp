@@ -17,7 +17,7 @@ double Rectangle::how_far(const Vector & vector, const Vector & direction)
 {
 	double temp = 0;
 	double alpha = b[0] - a[0];
-	for (int i = 0; i < a.dimension; ++i)
+	for (int i = 1; i < a.dimension; ++i)
 	{
 		if (direction.coordinates[i] > 0)
 		{
@@ -31,6 +31,8 @@ double Rectangle::how_far(const Vector & vector, const Vector & direction)
 			if (temp < alpha)
 				alpha = temp;
 		}
+		else
+			std::cout << "Here" << std::endl;
 	}
 	return(alpha);
 }

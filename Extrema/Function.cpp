@@ -13,7 +13,6 @@ Vector Function::gradient(const Vector & x, double h)
 		direction[i] = h;
 		grad[i] = ((*this)(x + direction) - (*this)(x)) / h;
 		direction[i] = 0;
-		//std::cout << grad[i] << std::endl;
 	}
 	return(grad);
 }
