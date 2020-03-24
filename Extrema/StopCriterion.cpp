@@ -1,5 +1,5 @@
 #include "StopCriterion.h"
-#include <iostream>
+
 
 StopCriterion::StopCriterion(Function & _function, Rectangle & _rectangle) :
 	function(_function), rectangle(_rectangle) {}
@@ -27,7 +27,7 @@ by_gradient::by_gradient(Function & _function, Rectangle & _rectangle, int _num_
 
 bool by_gradient::if_stop(const Vector & x_current, const Vector & x_previous)
 {
-	if (num_of_iter == 0 || abs(norm(function.gradient(x_current, 1e-3))) < eps)
+	if (num_of_iter == 0 || abs(norm(function.gradient(x_current, EPS))) < eps)
 		return(true);
 	--num_of_iter;
 	return(false);
@@ -47,7 +47,6 @@ by_difference::by_difference(Function & _function, Rectangle & _rectangle, int _
 
 bool by_difference::if_stop(const Vector & x_current, const Vector & x_previous)
 {
-	//std::cout << abs(function(x_current) - function(x_previous)) << std::endl;
 	if (num_of_iter == 0 || abs(function(x_current) - function(x_previous)) < eps)
 		return(true);
 	--num_of_iter;

@@ -2,6 +2,12 @@
 
 #include "Vector.h"
 
+/**
+@class Function
+The class is an abstract class. It represents abstract multivariable
+function and should be the parent class for class which
+represents specific function.
+*/
 class Function
 {
 public:
@@ -11,6 +17,11 @@ public:
 	Vector gradient(const Vector & x, double h);
 };
 
+
+/**
+@class Exponential
+The class represents function f(x,y) = exp(x) + exp(y).
+*/
 class Exponential : public Function
 {
 public:
@@ -19,6 +30,11 @@ public:
 	double operator ()(const Vector & x) override;
 };
 
+
+/**
+@class Trigonometric
+The class represents function f(x,y) = sin(x) + cos(y).
+*/
 class Trigonometric : public Function
 {
 public:
@@ -27,6 +43,11 @@ public:
 	double operator ()(const Vector & x) override;
 };
 
+/**
+@class Rosenbrock
+The class represents function f(x,y,z) = (1 - x)^2 + 100(y - x^2)^2 +
+(1 - y)^2 + 100(z - y^2)^2.
+*/
 class Rosenbrock : public Function
 {
 public:
@@ -35,6 +56,11 @@ public:
 	double operator ()(const Vector & x) override;
 };
 
+/**
+@class Quadratic
+The class represents function f(x,y,z,t) = (x - 1)^2 + (y - 2)^2 +
+(z - 3)^2 + (t - 4)^2.
+*/
 class Quadratic : public Function
 {
 public:

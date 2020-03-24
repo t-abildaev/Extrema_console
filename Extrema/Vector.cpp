@@ -58,6 +58,16 @@ Vector & Vector::operator -=(const Vector & vector)
 	return(*this);
 }
 
+bool Vector::operator ==(const Vector& vector)
+{
+	if (dimension == vector.dimension)
+		for (int i = 0; i < dimension; ++i)
+			if (coordinates[i] != vector.coordinates[i])
+				return(false);
+	return(true);
+}
+
+
 bool Vector::operator <=(const Vector & vector)
 {
 	if (dimension == vector.dimension)

@@ -28,14 +28,16 @@ void RSS::optimize()
 {
 	int i = 0;
 	double rand = 0;
-	Vector x_current(initial);
-	Vector x_previous = x_current + 1;
-	Vector x_next(dimension);
-	double value_current = function(x_current);
-	double value_next = 0;
 	Vector a = rectangle.get_a();
 	Vector b = rectangle.get_b();
 	double r = 0.5 * rectangle.min_length();
+	Vector x_current(initial);
+	Vector x_previous(dimension);
+	Vector x_next(dimension);
+	if (initial == a) x_previous = b;
+	else x_previous = a;
+	double value_current = function(x_current);
+	double value_next = 0;
 
 	Vector left = x_current - delta * r;
 	Vector right = x_current + delta * r;
@@ -101,7 +103,9 @@ void PRCG::optimize()
 	Vector a = rectangle.get_a();
 	Vector b = rectangle.get_b();
 	Vector x_current(initial);
-	Vector x_previous = x_current + 1;
+	Vector x_previous(dimension);
+	if (initial == a) x_previous = b;
+	else x_previous = a;
 	Vector grad_current(function.gradient(x_current, 1e-6));
 	Vector direction = -grad_current;
 	Vector grad_next(dimension);
@@ -117,10 +121,9 @@ void PRCG::optimize()
 		f_left = function(x_current + _left * direction);
 		f_right = function(x_current + _right * direction);
 	
-		while (right - left > 1e-6)
-		//while ((right - left) * norm(direction) > 1e-6)
+		while (right - left > EPS)
+		//while ((right - left) * norm(direction) > EPS)
 		{
-			//std::cout << function(x_current + left * direction) << "    " << function(x_current + _left * direction) << "    " << function(x_current + _right * direction) << "    " << function(x_current + right * direction) << std::endl;
 			if (f_left < f_right)
 			{
 				right = _right;
@@ -138,13 +141,10 @@ void PRCG::optimize()
 				f_right = function(x_current + _right * direction);
 			}
 		}
-		//std::cout << std::endl;
-		
-		//std::cout << i << " " << x_current[0] << " " << x_current[1] << " " << x_current[2] << "    " << alpha << "    " << norm(direction) << std::endl;
-		//std::cout << (x_current + alpha * direction)[0] << " " << (x_current + alpha * direction)[1] << " " << (x_current + alpha * direction)[2] << std::endl << std::endl;
+
 		x_previous = x_current;
 		x_current = x_previous + 0.5 * (left + right) * direction;
-		grad_next = function.gradient(x_current, 1e-6);
+		grad_next = function.gradient(x_current, EPS);
 		alpha = (grad_next * (grad_next - grad_current)) / (grad_current * grad_current);
 		direction = -grad_current + alpha * direction;
 		grad_current = grad_next;
