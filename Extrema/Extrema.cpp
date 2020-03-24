@@ -29,6 +29,7 @@ void begin()
 		std::cout << "2. 'Trigonometric': f(x, y) = sin(x) + cos(y)" << std::endl;
 		std::cout << "3. 'Rosenbrock': f(x, y, z) = (1 - x)^2 + 100(y - x)^2 + (1 - y)^2 + 100(z - y)^2" << std::endl;
 		std::cout << "4. 'Quadratic': f(x, y, z, t) = (x - 1)^2 + (y - 2)^2 + (z - 3)^2 + (t - 4)^2" << std::endl;
+		std::cin >> k;
 	}
 	std::cout << std::endl;
 
