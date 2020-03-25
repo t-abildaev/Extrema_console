@@ -1,6 +1,5 @@
 #include <cmath>
 #include "Function.h"
-#include <iostream>
 
 
 Vector Function::gradient(const Vector & x, double h)
@@ -31,7 +30,14 @@ double Exponential::operator ()(const Vector& x)
 	//H(x1, x2) = e^x1 + e^x2
 }
 
-double Rosenbrock::operator ()(const Vector & x)
+double Rosenbrock2::operator ()(const Vector& x)
+{
+	Vector X((Vector)x);
+	return((1 - X[0]) * (1 - X[0]) + 100 * (X[1] - X[0] * X[0]) * (X[1] - X[0] * X[0]));
+	//R(x1, x2) = (1 - x1)^2 + 100(x2 - x1^2)^2
+}
+
+double Rosenbrock3::operator ()(const Vector & x)
 {
 	Vector X((Vector) x);
 	return((1 - X[0]) * (1 - X[0]) + 100 * (X[1] - X[0] * X[0]) * (X[1] - X[0] * X[0]) + (1 - X[1]) * (1 - X[1]) + 100 * (X[2] - X[1] * X[1]) * (X[2] - X[1] * X[1]));
@@ -41,6 +47,6 @@ double Rosenbrock::operator ()(const Vector & x)
 double Quadratic::operator ()(const Vector & x)
 {
 	Vector X((Vector) x);
-	return((X[0] - 1) * (X[0] - 1) + (X[1] - 2) * (X[1] - 2) + (X[2] - 3) * (X[2] - 3) + (X[3] - 4) * (X[3] - 4));
-	//Q(x1, x2, x3, x4) = (x1 - 1)^2 + (x2 - 2)^2 + (x3 - 3)^2 + (x4 - 4)^2
+	return((X[0] - 1) * (X[0] - 1) + (X[1] - 2) * (X[1] - 2) + (X[2] - 3) * (X[2] - 3) + (X[3] - 4) * (X[3] - 4)) + X[0] * X[1] - X[1] * X[2] + X[2] * X[3];
+	//Q(x1, x2, x3, x4) = (x1 - 1)^2 + (x2 - 2)^2 + (x3 - 3)^2 + (x4 - 4)^2 + x1x2 - x2x3 + x3x4
 }

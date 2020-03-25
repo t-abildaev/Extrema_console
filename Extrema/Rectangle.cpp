@@ -1,5 +1,4 @@
 #include "Rectangle.h"
-#include <iostream>
 
 
 Rectangle::Rectangle(Vector _a, Vector _b) :
@@ -16,7 +15,11 @@ bool Rectangle::is_in_rectangle(const Vector & vector)
 double Rectangle::how_far(const Vector & vector, const Vector & direction)
 {
 	double temp = 0;
-	double alpha = b[0] - a[0];
+	double alpha = 0;
+	if (direction.coordinates[0] > 0)
+		alpha = (b[0] - vector.coordinates[0]) / direction.coordinates[0];
+	else if (direction.coordinates[0] < 0)
+		alpha = (a[0] - vector.coordinates[0]) / direction.coordinates[0];
 	for (int i = 1; i < a.dimension; ++i)
 	{
 		if (direction.coordinates[i] > 0)
@@ -31,8 +34,6 @@ double Rectangle::how_far(const Vector & vector, const Vector & direction)
 			if (temp < alpha)
 				alpha = temp;
 		}
-		else
-			std::cout << "Here" << std::endl;
 	}
 	return(alpha);
 }

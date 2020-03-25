@@ -24,11 +24,13 @@ void begin()
 
 	while (k != 1 && k != 2 && k != 3 && k != 4)
 	{
+		std::cin.clear();
 		std::cout << "Please, choose the function:" << std::endl;
 		std::cout << "1. 'Exponential': f(x, y) = exp(x) + exp(y)" << std::endl;
 		std::cout << "2. 'Trigonometric': f(x, y) = sin(x) + cos(y)" << std::endl;
-		std::cout << "3. 'Rosenbrock': f(x, y, z) = (1 - x)^2 + 100(y - x)^2 + (1 - y)^2 + 100(z - y)^2" << std::endl;
-		std::cout << "4. 'Quadratic': f(x, y, z, t) = (x - 1)^2 + (y - 2)^2 + (z - 3)^2 + (t - 4)^2" << std::endl;
+		std::cout << "3. 'Rosenbrock (2)': f(x, y) = (1 - x)^2 + 100(y - x)^2" << std::endl;
+		std::cout << "4. 'Rosenbrock (3)': f(x, y, z) = (1 - x)^2 + 100(y - x)^2 + (1 - y)^2 + 100(z - y)^2" << std::endl;
+		std::cout << "5. 'Quadratic': f(x, y, z, t) = (x - 1)^2 + (y - 2)^2 + (z - 3)^2 + (t - 4)^2 + xy - yz + zt" << std::endl;
 		std::cin >> k;
 	}
 	std::cout << std::endl;
@@ -42,9 +44,12 @@ void begin()
 		function = new Trigonometric;
 		dimension = 2; break;
 	case 3:
-		function = new Rosenbrock;
-		dimension = 3; break;
+		function = new Rosenbrock2;
+		dimension = 2; break;
 	case 4:
+		function = new Rosenbrock3;
+		dimension = 3; break;
+	case 5:
 		function = new Quadratic;
 		dimension = 4; break;
 	}
@@ -188,22 +193,29 @@ int main()
 //	StopCriterion*  sc{};
 //	Method * method{};
 //	Rectangle * rectangle{};
-//	int n = 10000;
+//	int n = 6000;
 //	double p = 0.5;
 //	double delta = 0.25;
-//	double eps = 1e-15;
+//	double eps = 0;
+//
 //	//int dimension = 2;
 //	//Vector a(dimension, -1);
 //	//Vector b(dimension, 1);
 //	//Vector initial(dimension, 0.5);
-//	//function = new Trigonometric;
-//	////function = new Exponential;
+//	////function = new Trigonometric;
+//	//function = new Exponential;
 //
 //	int dimension = 3;
 //	Vector a(dimension, -5);
 //	Vector b(dimension, 5);
 //	Vector initial(dimension, 0);
-//	function = new Rosenbrock;
+//	function = new Rosenbrock3;
+//
+//	//int dimension = 2;
+//	//Vector a(dimension, -5);
+//	//Vector b(dimension, 5);
+//	//Vector initial(dimension, 0);
+//	//function = new Rosenbrock2;
 //
 //	//int dimension = 4;
 //	//Vector a(dimension, 0);

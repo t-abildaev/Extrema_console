@@ -3,7 +3,7 @@
 #include "Vector.h"
 
 /**
-@class Method
+@class Rectangle
 The class represents rectangle in R^n. It contains two fields: vectors
 that are boundaries of rectangle.
 */

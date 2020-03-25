@@ -67,7 +67,13 @@ optimization.
 class PRCG :
 	public Method
 {
+protected:
+	const double PHI = 0.5 * (1 + sqrt(5));
 public:
 	PRCG(int _dimension, Function & _function, Rectangle & _rectangle, Vector _initial, StopCriterion & _stopCriterion);
+	///The "dir_search" methods calculate minima vector along the direction
+	Vector dir_search_II(const Vector & vector, const Vector & direction, double Left, double Right);
+	///The "dir_search" methods calculate minima vector along the direction
+	Vector dir_search_I(const Vector & vector, const Vector & direction, double lambda, int n = 3);
 	void optimize();
 };

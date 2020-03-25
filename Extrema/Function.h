@@ -44,16 +44,28 @@ public:
 };
 
 /**
-@class Rosenbrock
+@class Rosenbrock3
 The class represents function f(x,y,z) = (1 - x)^2 + 100(y - x^2)^2 +
 (1 - y)^2 + 100(z - y^2)^2.
 */
-class Rosenbrock : public Function
+class Rosenbrock3 : public Function
 {
 public:
-	Rosenbrock() {};
-	~Rosenbrock() {};
+	Rosenbrock3() {};
+	~Rosenbrock3() {};
 	double operator ()(const Vector & x) override;
+};
+
+/**
+@class Rosenbrock2
+The class represents function f(x,y,z) = (1 - x)^2 + 100(y - x^2)^2.
+*/
+class Rosenbrock2 : public Function
+{
+public:
+	Rosenbrock2() {};
+	~Rosenbrock2() {};
+	double operator ()(const Vector& x) override;
 };
 
 /**
