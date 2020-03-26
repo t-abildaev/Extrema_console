@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <chrono>
 #include "Vector.h"
 #include "Function.h"
@@ -35,6 +36,8 @@ public:
 	///This method optimizes the function and prints the results
 	virtual void optimize() = 0; 
 	void set_init(const Vector & vector);
+	//std::vector<double> xPath;
+	//std::vector<double> yPath;
 };
 
 /**

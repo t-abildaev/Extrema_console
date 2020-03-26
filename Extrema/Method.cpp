@@ -158,6 +158,8 @@ void PRCG::optimize()
 
 	while (!(stopCriterion.if_stop(x_current, x_previous)))
 	{
+		//xPath.push_back(x_current[0]);
+		//yPath.push_back(x_current[1]);
 		alpha = rectangle.how_far(x_current, direction);
 
 		//if (i < 101)
@@ -227,10 +229,17 @@ void PRCG::optimize()
 		++i;
 	}
 
+	//xPath.push_back(x_current[0]);
+	//yPath.push_back(x_current[1]);
+
 	std::cout << "x: (";
 	for (int i = 0; i < dimension - 1; ++i)
 		std::cout << x_current[i] << ", ";
 	std::cout << x_current[dimension - 1] << ")" << std::endl;
 	std::cout << "f(x): " << function(x_current) << std::endl;
 	std::cout << "Number of iterations: " << i;
+
+	//std::cout << "x: (" << xPath.back() << "," << yPath.back() << ")" << std::endl;
+	//std::cout << "f(x): " << function(x_current) << std::endl;
+	//std::cout << "Number of iterations: " << i;
 }

@@ -47,6 +47,6 @@ double Rosenbrock3::operator ()(const Vector & x)
 double Quadratic::operator ()(const Vector & x)
 {
 	Vector X((Vector) x);
-	return((X[0] - 1) * (X[0] - 1) + (X[1] - 2) * (X[1] - 2) + (X[2] - 3) * (X[2] - 3) + (X[3] - 4) * (X[3] - 4)) + X[0] * X[1] - X[1] * X[2] + X[2] * X[3];
-	//Q(x1, x2, x3, x4) = (x1 - 1)^2 + (x2 - 2)^2 + (x3 - 3)^2 + (x4 - 4)^2 + x1x2 - x2x3 + x3x4
+	return((X[0] - 1) * (X[0] - 1) + (X[1] - 2) * (X[1] - 2) + (X[2] - 3) * (X[2] - 3) + (X[3] - 4) * (X[3] - 4)) + X[0] * X[1] - 15 * X[1] * X[2] + 6 * X[2] * X[3] - 9 * X[1] * X[3];
+	//Q(x1, x2, x3, x4) = (x1 - 1)^2 + (x2 - 2)^2 + (x3 - 3)^2 + (x4 - 4)^2 + x1x2 - 15x2x3 + 6x3x4 - 9x2x4
 }
