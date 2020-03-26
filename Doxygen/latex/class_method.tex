@@ -1,0 +1,58 @@
+\hypertarget{class_method}{}\doxysection{Method Class Reference}
+\label{class_method}\index{Method@{Method}}
+
+
+{\ttfamily \#include $<$Method.\+h$>$}
+
+Inheritance diagram for Method\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_method}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_method_a39efd8a72531aeb8d07bd1de0f1c8053}\label{class_method_a39efd8a72531aeb8d07bd1de0f1c8053}} 
+{\bfseries Method} (int \+\_\+dimension, \mbox{\hyperlink{class_function}{Function}} \&\+\_\+function, \mbox{\hyperlink{class_rectangle}{Rectangle}} \&\+\_\+rectangle, \mbox{\hyperlink{class_vector}{Vector}} \+\_\+initial, \mbox{\hyperlink{class_stop_criterion}{Stop\+Criterion}} \&\+\_\+stop\+Criterion)
+\item 
+\mbox{\Hypertarget{class_method_a556ec2fcf43408dbac0a14ef512a02c8}\label{class_method_a556ec2fcf43408dbac0a14ef512a02c8}} 
+virtual void \mbox{\hyperlink{class_method_a556ec2fcf43408dbac0a14ef512a02c8}{optimize}} ()=0
+\begin{DoxyCompactList}\small\item\em This method optimizes the function and prints the results. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_method_a9f30adb835f599ee67274c69ed3fb59e}\label{class_method_a9f30adb835f599ee67274c69ed3fb59e}} 
+void {\bfseries set\+\_\+init} (const \mbox{\hyperlink{class_vector}{Vector}} \&vector)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_method_a0ae85cdde0dcd2e253a4832be8807fd0}\label{class_method_a0ae85cdde0dcd2e253a4832be8807fd0}} 
+const double \mbox{\hyperlink{class_method_a0ae85cdde0dcd2e253a4832be8807fd0}{E\+PS}} = 1e-\/6
+\begin{DoxyCompactList}\small\item\em This constant determines closeness of two numbers and exactness of calculating gradient. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_method_a2057c4d26cc5d65088259a230af71559}\label{class_method_a2057c4d26cc5d65088259a230af71559}} 
+int \mbox{\hyperlink{class_method_a2057c4d26cc5d65088259a230af71559}{dimension}}
+\begin{DoxyCompactList}\small\item\em Dimension of domain of the function. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_method_a4828376fb516bcb579f1b669ac14f99c}\label{class_method_a4828376fb516bcb579f1b669ac14f99c}} 
+\mbox{\hyperlink{class_function}{Function}} \& \mbox{\hyperlink{class_method_a4828376fb516bcb579f1b669ac14f99c}{function}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_function}{Function}} to be optimized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_method_a1c9f2c9284dca57b4a95850d959e4e44}\label{class_method_a1c9f2c9284dca57b4a95850d959e4e44}} 
+\mbox{\hyperlink{class_rectangle}{Rectangle}} \& \mbox{\hyperlink{class_method_a1c9f2c9284dca57b4a95850d959e4e44}{rectangle}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_rectangle}{Rectangle}} where the function is optimized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_method_a7877c563e42cfe43c8eb7a2b52e350bc}\label{class_method_a7877c563e42cfe43c8eb7a2b52e350bc}} 
+\mbox{\hyperlink{class_vector}{Vector}} \mbox{\hyperlink{class_method_a7877c563e42cfe43c8eb7a2b52e350bc}{initial}}
+\begin{DoxyCompactList}\small\item\em Initial guess for optimization process. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_method_a151481d1c41daa378ac1e5aeb0f4e54b}\label{class_method_a151481d1c41daa378ac1e5aeb0f4e54b}} 
+\mbox{\hyperlink{class_stop_criterion}{Stop\+Criterion}} \& \mbox{\hyperlink{class_method_a151481d1c41daa378ac1e5aeb0f4e54b}{stop\+Criterion}}
+\begin{DoxyCompactList}\small\item\em Stop criterion for optimization process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class is an abstract class. It represents abstract optimization method and should be the parent class for class which represents specific method.
+
+The class represents Random Search (Simple) method of optimization. Next vector is being searched in small neighbourhood of current vector (with probability p) or in the whole area (with probability 1 -\/ p). Delta determines the smallness of neighbourhood and decreases if search in neighbourhood were succesfull.
+
+The class represents Polak-\/\+Ribiere Conjugate Gradient method of optimization. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Username/source/repos/\+Extrema/\+Extrema/Method.\+h\item 
+C\+:/\+Users/\+Username/source/repos/\+Extrema/\+Extrema/Method.\+cpp\end{DoxyCompactItemize}

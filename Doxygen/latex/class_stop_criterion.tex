@@ -1,0 +1,61 @@
+\hypertarget{class_stop_criterion}{}\doxysection{Stop\+Criterion Class Reference}
+\label{class_stop_criterion}\index{StopCriterion@{StopCriterion}}
+
+
+{\ttfamily \#include $<$Stop\+Criterion.\+h$>$}
+
+Inheritance diagram for Stop\+Criterion\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_stop_criterion}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_stop_criterion_ae957a2c2d94d1756ea17349baf603747}\label{class_stop_criterion_ae957a2c2d94d1756ea17349baf603747}} 
+{\bfseries Stop\+Criterion} (\mbox{\hyperlink{class_function}{Function}} \&\+\_\+function, \mbox{\hyperlink{class_rectangle}{Rectangle}} \&\+\_\+rectangle)
+\item 
+\mbox{\Hypertarget{class_stop_criterion_a8b212f8f91578c9696d09935a9e03e58}\label{class_stop_criterion_a8b212f8f91578c9696d09935a9e03e58}} 
+{\bfseries Stop\+Criterion} (\mbox{\hyperlink{class_function}{Function}} \&\+\_\+function, \mbox{\hyperlink{class_rectangle}{Rectangle}} \&\+\_\+rectangle, int \+\_\+num\+\_\+of\+\_\+iter)
+\item 
+\mbox{\Hypertarget{class_stop_criterion_a815a5a9fba81482a0fd2701ae76969bd}\label{class_stop_criterion_a815a5a9fba81482a0fd2701ae76969bd}} 
+{\bfseries Stop\+Criterion} (\mbox{\hyperlink{class_function}{Function}} \&\+\_\+function, \mbox{\hyperlink{class_rectangle}{Rectangle}} \&\+\_\+rectangle, double \+\_\+eps)
+\item 
+\mbox{\Hypertarget{class_stop_criterion_af297b10088b504e32f0c33945273e2c0}\label{class_stop_criterion_af297b10088b504e32f0c33945273e2c0}} 
+{\bfseries Stop\+Criterion} (\mbox{\hyperlink{class_function}{Function}} \&\+\_\+function, \mbox{\hyperlink{class_rectangle}{Rectangle}} \&\+\_\+rectangle, int \+\_\+num\+\_\+of\+\_\+iter, double \+\_\+eps)
+\item 
+\mbox{\Hypertarget{class_stop_criterion_a2e789adb8088f505e4fb78552518d389}\label{class_stop_criterion_a2e789adb8088f505e4fb78552518d389}} 
+virtual bool {\bfseries if\+\_\+stop} (const \mbox{\hyperlink{class_vector}{Vector}} \&x\+\_\+current, const \mbox{\hyperlink{class_vector}{Vector}} \&x\+\_\+previous)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_stop_criterion_a87d403e2b8777c96628b60110c316aa8}\label{class_stop_criterion_a87d403e2b8777c96628b60110c316aa8}} 
+const double \mbox{\hyperlink{class_stop_criterion_a87d403e2b8777c96628b60110c316aa8}{E\+PS}} = 1e-\/6
+\begin{DoxyCompactList}\small\item\em This constant determines exactness of calculating gradient. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_stop_criterion_a097e4c8dcc639fd90e741b10f5486a2f}\label{class_stop_criterion_a097e4c8dcc639fd90e741b10f5486a2f}} 
+int \mbox{\hyperlink{class_stop_criterion_a097e4c8dcc639fd90e741b10f5486a2f}{num\+\_\+of\+\_\+iter}} = 1000
+\begin{DoxyCompactList}\small\item\em Maximum number of iterations of optimization process. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_stop_criterion_aa848cdc8c317a0788f3bc2daa9444b18}\label{class_stop_criterion_aa848cdc8c317a0788f3bc2daa9444b18}} 
+double \mbox{\hyperlink{class_stop_criterion_aa848cdc8c317a0788f3bc2daa9444b18}{eps}} = 0.\+05
+\begin{DoxyCompactList}\small\item\em This constant determines exactness of optimization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_stop_criterion_aa32894873268623de0790d9fa9cadab0}\label{class_stop_criterion_aa32894873268623de0790d9fa9cadab0}} 
+\mbox{\hyperlink{class_function}{Function}} \& {\bfseries function}
+\item 
+\mbox{\Hypertarget{class_stop_criterion_a880398bcb392cedb49e3f6ec9df655ce}\label{class_stop_criterion_a880398bcb392cedb49e3f6ec9df655ce}} 
+\mbox{\hyperlink{class_rectangle}{Rectangle}} \& {\bfseries rectangle}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class is an abstract class. It represents abstract stop criterion of optimization process and should be the parent class for class which represents specific stop criterion.
+
+The class represents stop criterion that initiates stop if norm of gradient of function becomes small enough.
+
+The class represents stop criterion that initiates stop if absolute difference between value of function in previous vector and value of function in current vector becomes small enough. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Username/source/repos/\+Extrema/\+Extrema/Stop\+Criterion.\+h\item 
+C\+:/\+Users/\+Username/source/repos/\+Extrema/\+Extrema/Stop\+Criterion.\+cpp\end{DoxyCompactItemize}

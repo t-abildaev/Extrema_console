@@ -154,83 +154,23 @@ void PRCG::optimize()
 	else x_previous = a;
 	Vector grad_current(function.gradient(x_current, EPS));
 	Vector direction = -grad_current;
-	Vector grad_next(dimension);
+	Vector grad_previous(dimension);
 
 	while (!(stopCriterion.if_stop(x_current, x_previous)))
 	{
-		//xPath.push_back(x_current[0]);
-		//yPath.push_back(x_current[1]);
 		alpha = rectangle.how_far(x_current, direction);
-
-		//if (i < 101)
-		//{
-		//	std::cout << std::endl;
-		//	std::cout << "x: (";
-		//	for (int j = 0; j < dimension - 1; ++j)
-		//		std::cout << x_current[j] << ", ";
-		//	std::cout << x_current[dimension - 1] << "),  ";
-		//	std::cout << "value: " << function(x_current) << ",  ";
-		//	std::cout << "alpha: " << alpha << ",  ";
-		//	std::cout << "direction: (";
-		//	for (int j = 0; j < dimension - 1; ++j)
-		//		std::cout << direction[j] << ", ";
-		//	std::cout << direction[dimension - 1] << "),  ";;
-		//	std::cout << "tot: (";
-		//	for (int j = 0; j < dimension - 1; ++j)
-		//		std::cout << (x_current + alpha * direction)[j] << ", ";
-		//	std::cout << (x_current + alpha * direction)[dimension - 1] << ")" << std::endl;
-		//}
-
-		//left = 0;
-		//right = alpha;
-		//_left = right - (right - left) / phi;
-		//_right = left + (right - left) / phi;
-		//f_left = function(x_current + _left * direction);
-		//f_right = function(x_current + _right * direction);
-	
-		////while (abs(function(x_current + left * direction) - function(x_current + right * direction)) > EPS)
-		//while (abs(right - left) > EPS)
-		////while (abs(right - left) * norm(direction) > EPS)
-		//{
-		//	if (i < 101)
-		//	{
-		//		std::cout << function(x_current + left * direction) << "  " << function(x_current + _left * direction) << "  " << function(x_current + _right * direction) << "  " << function(x_current + right * direction) << std::endl;
-		//	}
-		//	
-		//	if (f_left < f_right)
-		//	{
-		//		right = _right;
-		//		_right = _left;
-		//		f_right = f_left;
-		//		_left = right - (right - left) / phi;
-		//		f_left = function(x_current + _left * direction);
-		//	}
-		//	else
-		//	{
-		//		left = _left;
-		//		_left = _right;
-		//		f_left = f_right;
-		//		_right = left + (right - left) / phi;
-		//		f_right = function(x_current + _right * direction);
-		//	}
-
-		//	++num_golden[i];
-		//}
 
 		x_previous = x_current;
 		x_current = dir_search_I(x_current, direction, alpha);
-		//x_current = x_previous + 0.5 * (left + right) * direction;
-		grad_next = function.gradient(x_current, EPS);
-		beta = (grad_next * (grad_next - grad_current)) / (grad_current * grad_current);
-		direction = -grad_current + beta * direction;
-		//direction = direction / norm(direction);
-		grad_current = grad_next;
+
+		grad_previous = grad_current;
+		grad_current = function.gradient(x_current, EPS);
+
+		alpha = (grad_current * (grad_current - grad_previous)) / (grad_previous * grad_previous);
+		direction = -grad_current + alpha * direction;
 
 		++i;
 	}
-
-	//xPath.push_back(x_current[0]);
-	//yPath.push_back(x_current[1]);
 
 	std::cout << "x: (";
 	for (int i = 0; i < dimension - 1; ++i)
@@ -238,8 +178,4 @@ void PRCG::optimize()
 	std::cout << x_current[dimension - 1] << ")" << std::endl;
 	std::cout << "f(x): " << function(x_current) << std::endl;
 	std::cout << "Number of iterations: " << i;
-
-	//std::cout << "x: (" << xPath.back() << "," << yPath.back() << ")" << std::endl;
-	//std::cout << "f(x): " << function(x_current) << std::endl;
-	//std::cout << "Number of iterations: " << i;
 }
